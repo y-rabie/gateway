@@ -27,9 +27,6 @@ deployment:
     - topologyKey: topology.kubernetes.io/zone
       maxSkew: 1
       whenUnsatisfiable: ScheduleAnyway
-      labelSelector:
-        matchLabels:
-          app: envoyproxy
     tolerations:
     - key: "custom.taint"
       operator: "Equal"

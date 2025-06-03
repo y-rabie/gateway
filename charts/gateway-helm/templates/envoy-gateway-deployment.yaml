@@ -35,7 +35,15 @@ spec:
       {{- end }}
       {{- with .Values.deployment.pod.topologySpreadConstraints }}
       topologySpreadConstraints:
-        {{- toYaml . | nindent 6 }}
+        {{- range $constraint := . }}
+      - {{ toYaml $constraint | nindent 8 | trim }}
+        {{- if not $constraint.labelSelector }}
+        labelSelector:
+          matchLabels:
+            control-plane: envoy-gateway
+            {{- include "eg.selectorLabels" $ | nindent 12 }}
+        {{- end }}
+        {{- end }}
       {{- end }}
       {{- with .Values.deployment.pod.tolerations }}
       tolerations:

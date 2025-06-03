@@ -417,12 +417,14 @@ spec:
         maxSkew: 1
         topologyKey: kubernetes.io/hostname
         whenUnsatisfiable: DoNotSchedule
-      - labelSelector:
-          matchLabels:
-            app: envoyproxy
-        maxSkew: 1
+      - maxSkew: 1
         topologyKey: topology.kubernetes.io/zone
         whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            control-plane: envoy-gateway
+            app.kubernetes.io/name: gateway-helm
+            app.kubernetes.io/instance: gateway-helm
       tolerations:
       - key: custom.taint
         operator: Equal

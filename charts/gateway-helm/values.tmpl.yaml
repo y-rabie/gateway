@@ -76,6 +76,7 @@ deployment:
       prometheus.io/scrape: 'true'
       prometheus.io/port: '19001'
     labels: {}
+    # If labelSelector is left out, it will default to the labelSelector configuration of the deployment.
     topologySpreadConstraints: []
     tolerations: []
     nodeSelector: {}
